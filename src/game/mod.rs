@@ -13,4 +13,5 @@ pub use room::Room;
 mod world;
 pub use world::World;
 
+/// Types of exits that can be used in a [`Map`] between [`Rooms`].
 pub mod exit_types;

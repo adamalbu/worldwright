@@ -1,6 +1,12 @@
-#![warn(missing_docs, clippy::all)]
+#![warn(
+    missing_docs,
+    missing_copy_implementations,
+    missing_debug_implementations,
+    clippy::all
+)]
 #![allow(dead_code)]
-//! This is a crate for building text adventure games.
+//! This crate aims to make it easier to create interactive fiction games in Rust.
+//! It is inspired by [Inform 7](https://ganelson.github.io/inform-website/).
 
 const VOWELS: &str = "aeiou";
 
@@ -12,9 +18,9 @@ fn starts_with_vowel(s: &str) -> bool {
     }
 }
 
-use game::{Direction, World, exit_types};
+pub use game::*;
 
-pub mod game;
+mod game;
 
 fn main() {
     let mut world = World::new();
@@ -30,7 +36,7 @@ fn main() {
     );
 
     let exit = exit_types::Door::new(true);
-    let library_id = world.map.new_room_in_direction(
+    let _library_id = world.map.new_room_in_direction(
         grand_hall_id,
         Direction::East,
         Box::new(exit),
