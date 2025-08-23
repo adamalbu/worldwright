@@ -19,7 +19,7 @@ impl Direction {
     /// This method takes a [Direction] and returns the [`Direction`] it is opposite to.
     /// # Examples
     /// ```
-    /// use worldwright::Direction;
+    /// use worldwright::map::Direction;
     ///
     /// let north = Direction::North;
     /// assert_eq!(north.opposite(), Direction::South);

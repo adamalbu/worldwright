@@ -1,7 +1,4 @@
-use crate::{
-    Exit,
-    game::{Direction, ExitType, Room},
-};
+use crate::map::{Direction, Exit, ExitType, Room};
 use petgraph::prelude::{Graph, NodeIndex};
 
 /// Indicates whether an exit is leading away from or towards a node.
@@ -19,10 +16,10 @@ pub enum ExitWay {
 ///
 /// # Examples
 /// ```
-/// use worldwright::{Direction, ExitType, Room};
-/// use worldwright::exit_types::Door;
+/// use worldwright::map::{Direction, ExitType, Map, Room};
+/// use worldwright::map::exit_types::Door;
 ///
-/// let mut map = worldwright::Map::new();
+/// let mut map = Map::new();
 /// let foyer_id = map.new_room("You are in the dusty foyer of an old manor.".into());
 /// let exit = Door::new_with_name(false, "heavy wooden door".into());
 /// let grand_hall_id = map.new_room_in_direction(
@@ -51,7 +48,7 @@ impl Map {
     ///
     /// # Examples
     /// ```
-    /// use worldwright::Map;
+    /// use worldwright::map::Map;
     ///
     /// let mut map = Map::new();
     /// assert!(map.graph.node_count() == 0);
@@ -69,7 +66,7 @@ impl Map {
     ///
     /// # Examples
     /// ```
-    /// use worldwright::{Map, Room};
+    /// use worldwright::map::{Map, Room};
     ///
     /// let mut map = Map::new();
     /// let room = Room::new("You are in a bright, sunny room.".into());
@@ -87,8 +84,8 @@ impl Map {
     ///
     /// # Examples
     /// ```
-    /// use worldwright::{Direction, ExitType, Map};
-    /// use worldwright::exit_types::RegularExit;
+    /// use worldwright::map::{Direction, ExitType, Map};
+    /// use worldwright::map::exit_types::RegularExit;
     ///
     /// let mut map = Map::new();
     /// let foyer_id = map.new_room("You are in the dusty foyer of an old manor.".into());
@@ -137,8 +134,8 @@ impl Map {
     ///
     /// # Examples
     /// ```
-    /// use worldwright::exit_types::RegularExit;
-    /// use worldwright::{Direction, ExitType, Map};
+    /// use worldwright::map::exit_types::RegularExit;
+    /// use worldwright::map::{Direction, ExitType, Map};
     ///
     /// let mut map = Map::new();
     /// let central_room = map.new_room("You are in the central room.".into());

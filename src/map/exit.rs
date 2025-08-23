@@ -1,6 +1,6 @@
-use crate::{Direction, ExitType};
+use crate::map::{Direction, ExitType};
 
-/// An `Exit` from a [`Room`](crate::Room) in a given [`Direction`] with a specific [`ExitType`].
+/// An `Exit` from a [`Room`](crate::map::Room) in a given [`Direction`] with a specific [`ExitType`].
 #[derive(Debug)]
 pub struct Exit {
     /// The [`Direction`] of the `Exit`.

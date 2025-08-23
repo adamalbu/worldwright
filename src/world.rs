@@ -1,4 +1,4 @@
-use crate::game::Map;
+use crate::map::Map;
 
 /// The entire game world.
 ///

@@ -1,4 +1,4 @@
-use crate::game::{Direction, ExitType};
+use crate::map::{Direction, ExitType};
 use crate::starts_with_vowel;
 
 /// A regular exit that the player can always go through.
@@ -7,8 +7,8 @@ use crate::starts_with_vowel;
 ///
 /// # Examples
 /// ```
-/// use worldwright::exit_types::RegularExit;
-/// use worldwright::{ Direction, ExitType };
+/// use worldwright::map::exit_types::RegularExit;
+/// use worldwright::map::{ Direction, ExitType };
 ///
 /// let exit = RegularExit;
 /// assert!(exit.can_go_through());
@@ -24,8 +24,8 @@ impl ExitType for RegularExit {
     ///
     /// # Examples
     /// ```
-    /// use worldwright::exit_types::RegularExit;
-    /// use worldwright::ExitType;
+    /// use worldwright::map::exit_types::RegularExit;
+    /// use worldwright::map::ExitType;
     ///
     /// let exit = RegularExit;
     /// assert!(exit.can_go_through());
@@ -38,8 +38,8 @@ impl ExitType for RegularExit {
     ///
     /// # Examples
     /// ```
-    /// use worldwright::exit_types::RegularExit;
-    /// use worldwright::{ Direction, ExitType };
+    /// use worldwright::map::exit_types::RegularExit;
+    /// use worldwright::map::{ Direction, ExitType };
     ///
     /// let exit = RegularExit;
     /// assert_eq!(exit.description(Direction::North), "an exit north");
@@ -55,8 +55,8 @@ impl ExitType for RegularExit {
 ///
 /// # Examples
 /// ```
-/// use worldwright::exit_types::NamedExit;
-/// use worldwright::{ Direction, ExitType };
+/// use worldwright::map::exit_types::NamedExit;
+/// use worldwright::map::{ Direction, ExitType };
 ///
 /// let exit = NamedExit::new("archway".into());
 /// assert!(exit.can_go_through());
@@ -81,8 +81,8 @@ impl ExitType for NamedExit {
     ///
     /// # Examples
     /// ```
-    /// use worldwright::exit_types::NamedExit;
-    /// use worldwright::ExitType;
+    /// use worldwright::map::exit_types::NamedExit;
+    /// use worldwright::map::ExitType;
     ///
     /// let exit = NamedExit::new("archway".into());
     /// assert!(exit.can_go_through());
@@ -95,8 +95,8 @@ impl ExitType for NamedExit {
     ///
     /// # Examples
     /// ```
-    /// use worldwright::exit_types::NamedExit;
-    /// use worldwright::{ Direction, ExitType };
+    /// use worldwright::map::exit_types::NamedExit;
+    /// use worldwright::map::{ Direction, ExitType };
     ///
     /// let exit = NamedExit::new("archway".into());
     /// assert_eq!(exit.description(Direction::East), "an archway east");
@@ -122,8 +122,8 @@ impl ExitType for NamedExit {
 ///
 /// # Examples
 /// ```
-/// use worldwright::exit_types::Door;
-/// use worldwright::{ Direction, ExitType };
+/// use worldwright::map::exit_types::Door;
+/// use worldwright::map::{ Direction, ExitType };
 ///
 /// let mut door = Door::new_with_name(true, "heavy wooden door".into());
 /// assert!(!door.can_go_through());
@@ -160,8 +160,8 @@ impl Door {
     ///
     /// # Examples
     /// ```
-    /// use worldwright::exit_types::Door;
-    /// use worldwright::{ ExitType };
+    /// use worldwright::map::exit_types::Door;
+    /// use worldwright::map::{ ExitType };
     ///
     /// let mut door = Door::new(false);
     /// assert!(!door.locked);
@@ -177,8 +177,8 @@ impl Door {
     ///
     /// # Examples
     /// ```
-    /// use worldwright::exit_types::Door;
-    /// use worldwright::{ ExitType };
+    /// use worldwright::map::exit_types::Door;
+    /// use worldwright::map::{ ExitType };
     ///
     /// let mut door = Door::new(true);
     /// assert!(door.locked);
@@ -194,8 +194,8 @@ impl ExitType for Door {
     ///
     /// # Examples
     /// ```
-    /// use worldwright::exit_types::NamedExit;
-    /// use worldwright::ExitType;
+    /// use worldwright::map::exit_types::NamedExit;
+    /// use worldwright::map::ExitType;
     ///
     /// let exit = NamedExit::new("archway".into());
     /// assert!(exit.can_go_through());
@@ -208,8 +208,8 @@ impl ExitType for Door {
     ///
     /// # Examples
     /// ```
-    /// use worldwright::exit_types::Door;
-    /// use worldwright::{ Direction, ExitType };
+    /// use worldwright::map::exit_types::Door;
+    /// use worldwright::map::{ Direction, ExitType };
     ///
     /// let mut door = Door::new_with_name(false, "antique wooden door".into());
     /// assert_eq!(door.description(Direction::West), "an antique wooden door west");
