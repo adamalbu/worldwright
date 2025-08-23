@@ -1,5 +1,4 @@
 #![warn(
-    missing_docs,
     missing_copy_implementations,
     missing_debug_implementations,
     clippy::all
@@ -7,6 +6,17 @@
 #![allow(dead_code)]
 //! This crate aims to make it easier to create interactive fiction games in Rust.
 //! It is inspired by [Inform 7](https://ganelson.github.io/inform-website/).
+
+/// The map module contains all the structures and functions related to the game map, including [`Room`](crate::map::Room)s and [`Exit`](crate::map::Exit)s.
+///
+/// The map module contains everything related to managing the layout of the game map, including creating and connecting [`Room`](crate::map::Room)s, defining [`Exit`](crate::map::Exit)s between [`Room`](crate::map::Room)s, and navigating the [`Map`](crate::map::Map).
+pub mod map;
+
+mod world;
+pub use world::World;
+
+mod player;
+pub use player::Player;
 
 const VOWELS: &str = "aeiou";
 
@@ -17,14 +27,6 @@ fn starts_with_vowel(s: &str) -> bool {
         false
     }
 }
-
-pub use world::World;
-
-/// The map module contains all the structures and functions related to the game map, including [`Room`](crate::map::Room)s and [`Exit`](crate::map::Exit)s.
-///
-/// The map module contains everything related to managing the layout of the game map, including creating and connecting [`Room`](crate::map::Room)s, defining [`Exit`](crate::map::Exit)s between [`Room`](crate::map::Room)s, and navigating the [`Map`](crate::map::Map).
-pub mod map;
-mod world;
 
 fn main() {
     let mut world = World::new();
