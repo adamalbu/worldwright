@@ -8,7 +8,7 @@ mod exit_type;
 pub use exit_type::ExitType;
 
 mod map;
-pub use map::Map;
+pub use map::{ExitWay, Map};
 
 mod room;
 pub use room::Room;

@@ -4,6 +4,15 @@ use crate::{
 };
 use petgraph::prelude::{Graph, NodeIndex};
 
+/// Indicates whether an exit is leading away from or towards a node.
+#[derive(Clone, Copy, Debug)]
+pub enum ExitWay {
+    /// The exit is leading away from the node.
+    From,
+    /// The exit is going towards the node.
+    To,
+}
+
 /// A map of [`Room`]s connected by [`ExitType`]s and [`Direction`]s.
 ///
 /// A `Map` is a graph where nodes are [`Room`]s and edges are tuples of [`Direction`]s and [`ExitType`]s.
@@ -117,6 +126,76 @@ impl Map {
         exit: Box<dyn ExitType>,
     ) {
         self.graph.add_edge(from, to, Exit::new(direction, exit));
+    }
+
+    /// Retrieves all [`Exit`]s connected to a given [`Room`], along with their [`Direction`].
+    ///
+    /// Returns a vector of tuples containing references to the [`Exit`] and an [`ExitWay`] indicating whether the exit is going away from or to the node.
+    ///
+    /// **Important**: The direction of the exit is determined by the direction it was added to the graph, NOT relative to this node.
+    /// To get the relative direction, you can use the [`get_relative_direction`](Map::get_relative_direction) method.
+    ///
+    /// # Examples
+    /// ```
+    /// use worldwright::exit_types::RegularExit;
+    /// use worldwright::{Direction, ExitType, Map};
+    ///
+    /// let mut map = Map::new();
+    /// let central_room = map.new_room("You are in the central room.".into());
+    ///
+    /// let upper_room = map.new_room_in_direction(
+    ///     central_room,
+    ///     Direction::North,
+    ///     Box::new(RegularExit),
+    ///     "You are in the upper room.".into(),
+    /// );
+    /// assert_eq!(map.get_exits(central_room).len(), 1);
+    /// let (central_room_first_exit, _) = map.get_exits(central_room)[0];
+    /// assert_eq!(central_room_first_exit.direction, Direction::North);
+    ///
+    /// let lower_room = map.new_room("You are in the lower room.".into());
+    /// map.connect_rooms(
+    ///     lower_room,
+    ///     central_room,
+    ///     Direction::North,
+    ///     Box::new(RegularExit),
+    /// );
+    /// assert_eq!(map.get_exits(central_room).len(), 2);
+    /// let (central_room_second_exit, central_room_second_exit_way) = map.get_exits(central_room)[1];
+    /// // It should still be North, because the direction is determined by how it was added to the graph, not relative to this node.
+    /// assert_eq!(central_room_second_exit.direction, Direction::North);
+    ///
+    /// // To get the relative direction, you can use the get_relative_direction method.
+    /// let relative_direction =
+    ///     map.get_relative_direction(central_room_second_exit, central_room_second_exit_way);
+    /// assert_eq!(relative_direction, Direction::South);
+    pub fn get_exits(&self, room_id: NodeIndex) -> Vec<(&Exit, ExitWay)> {
+        let edges_from = self
+            .graph
+            .edges_directed(room_id, petgraph::Direction::Outgoing);
+        let edges_to = self
+            .graph
+            .edges_directed(room_id, petgraph::Direction::Incoming);
+
+        let mut exits = Vec::new();
+
+        for edge in edges_from {
+            exits.push((edge.weight(), ExitWay::From));
+        }
+
+        for edge in edges_to {
+            exits.push((edge.weight(), ExitWay::To));
+        }
+
+        exits
+    }
+
+    /// Gets the relative [`Direction`] of an [`Exit`] based on the specified [`ExitWay`].
+    pub fn get_relative_direction(&self, exit: &Exit, exit_way: ExitWay) -> Direction {
+        match exit_way {
+            ExitWay::From => exit.direction,
+            ExitWay::To => exit.direction.opposite(),
+        }
     }
 }
 
