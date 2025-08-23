@@ -1,7 +1,7 @@
 use crate::game::{Direction, Exit, Room};
 use petgraph::prelude::{Graph, NodeIndex};
 
-/// A map of [`Room`]s connected by [`Exits`] and [`Directions`].
+/// A map of [`Room`]s connected by [`Exit`]s and [`Direction`]s.
 ///
 /// A `Map` is a graph where nodes are [`Room`]s and edges are tuples of [`Direction`] and [`Exit`].
 ///

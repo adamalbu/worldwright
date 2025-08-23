@@ -1,5 +1,5 @@
 #[derive(Clone, Debug)]
-/// A struct representing a room in the [`Map`].
+/// A struct representing a room in the [`Map`](crate::Map).
 ///
 /// Each `Room` has a description.
 pub struct Room {
