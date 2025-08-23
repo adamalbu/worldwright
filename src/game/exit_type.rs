@@ -1,8 +1,8 @@
 use crate::game::Direction;
 
-/// An `ExitType` represents a passage between two rooms in the map.
+/// An `ExitType` represents the type of passage between two [`Room`](crate::Room)s in the [`Map`](crate::Map).
 ///
-/// It represents a passage that the player can go through to move from one room to another.
+/// It represents a the type of passage the player can go through to move from one room to another and the conditions needed for the player to be able to go through an exit.
 pub trait ExitType: std::fmt::Debug {
     /// Checks whether the player can go through this exit.
     fn can_go_through(&self) -> bool;

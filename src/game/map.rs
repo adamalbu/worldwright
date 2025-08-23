@@ -1,4 +1,7 @@
-use crate::game::{Direction, ExitType, Room};
+use crate::{
+    Exit,
+    game::{Direction, ExitType, Room},
+};
 use petgraph::prelude::{Graph, NodeIndex};
 
 /// A map of [`Room`]s connected by [`ExitType`]s and [`Direction`]s.
@@ -23,7 +26,7 @@ use petgraph::prelude::{Graph, NodeIndex};
 #[derive(Debug)]
 pub struct Map {
     /// The underlying graph structure of the map.
-    pub graph: Graph<Room, (Direction, Box<dyn ExitType>)>,
+    pub graph: Graph<Room, Exit>,
 }
 
 impl Map {
@@ -99,7 +102,7 @@ impl Map {
         room_description: String,
     ) -> NodeIndex {
         let to = self.new_room(room_description);
-        self.graph.add_edge(from, to, (direction, exit));
+        self.graph.add_edge(from, to, Exit::new(direction, exit));
         to
     }
 
@@ -113,7 +116,7 @@ impl Map {
         direction: Direction,
         exit: Box<dyn ExitType>,
     ) {
-        self.graph.add_edge(from, to, (direction, exit));
+        self.graph.add_edge(from, to, Exit::new(direction, exit));
     }
 }
 
