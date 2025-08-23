@@ -16,3 +16,9 @@ impl World {
         Self { map }
     }
 }
+
+impl Default for World {
+    fn default() -> Self {
+        Self::new()
+    }
+}

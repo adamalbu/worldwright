@@ -45,6 +45,6 @@ impl std::fmt::Display for Direction {
             Direction::South => "south",
             Direction::West => "west",
         };
-        write!(f, "{}", s)
+        write!(f, "{s}")
     }
 }

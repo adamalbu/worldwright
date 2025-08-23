@@ -116,3 +116,9 @@ impl Map {
         self.graph.add_edge(from, to, (direction, exit));
     }
 }
+
+impl Default for Map {
+    fn default() -> Self {
+        Self::new()
+    }
+}

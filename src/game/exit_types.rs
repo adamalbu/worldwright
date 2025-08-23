@@ -45,7 +45,7 @@ impl Exit for RegularExit {
     /// assert_eq!(exit.description(Direction::North), "an exit north");
     /// ```
     fn description(&self, direction: Direction) -> String {
-        format!("an exit {}", direction)
+        format!("an exit {direction}")
     }
 }
 
