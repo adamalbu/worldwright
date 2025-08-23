@@ -2,7 +2,7 @@ mod direction;
 pub use direction::Direction;
 
 mod exit;
-pub use exit::Exit;
+pub use exit::ExitType;
 
 mod map;
 pub use map::Map;

@@ -1,13 +1,13 @@
-use crate::game::{Direction, Exit, Room};
+use crate::game::{Direction, ExitType, Room};
 use petgraph::prelude::{Graph, NodeIndex};
 
-/// A map of [`Room`]s connected by [`Exit`]s and [`Direction`]s.
+/// A map of [`Room`]s connected by [`ExitType`]s and [`Direction`]s.
 ///
-/// A `Map` is a graph where nodes are [`Room`]s and edges are tuples of [`Direction`] and [`Exit`].
+/// A `Map` is a graph where nodes are [`Room`]s and edges are tuples of [`Direction`]s and [`ExitType`]s.
 ///
 /// # Examples
 /// ```
-/// use worldwright::{Direction, Exit, Room};
+/// use worldwright::{Direction, ExitType, Room};
 /// use worldwright::exit_types::Door;
 ///
 /// let mut map = worldwright::Map::new();
@@ -23,7 +23,7 @@ use petgraph::prelude::{Graph, NodeIndex};
 #[derive(Debug)]
 pub struct Map {
     /// The underlying graph structure of the map.
-    pub graph: Graph<Room, (Direction, Box<dyn Exit>)>,
+    pub graph: Graph<Room, (Direction, Box<dyn ExitType>)>,
 }
 
 impl Map {
@@ -75,7 +75,7 @@ impl Map {
     ///
     /// # Examples
     /// ```
-    /// use worldwright::{Direction, Exit, Map};
+    /// use worldwright::{Direction, ExitType, Map};
     /// use worldwright::exit_types::RegularExit;
     ///
     /// let mut map = Map::new();
@@ -95,7 +95,7 @@ impl Map {
         &mut self,
         from: NodeIndex,
         direction: Direction,
-        exit: Box<dyn Exit>,
+        exit: Box<dyn ExitType>,
         room_description: String,
     ) -> NodeIndex {
         let to = self.new_room(room_description);
@@ -111,7 +111,7 @@ impl Map {
         from: NodeIndex,
         to: NodeIndex,
         direction: Direction,
-        exit: Box<dyn Exit>,
+        exit: Box<dyn ExitType>,
     ) {
         self.graph.add_edge(from, to, (direction, exit));
     }
